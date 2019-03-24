@@ -1,0 +1,8 @@
+CREATE TABLE USER_PASSWD (
+							USERNAME TEXT,
+							UID INT PRIMARY_KEY,
+							GID INT,
+							INFO TEXT,
+							HOME_DIR TEXT,
+							SHELL TEXT
+							);

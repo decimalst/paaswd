@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS USER_GROUP (
+							GROUP_NAME TEXT,
+							GID INT,
+							GROUP_LIST TEXT
+							);

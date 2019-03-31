@@ -99,7 +99,7 @@ def groups_query():
     if(len(add_string)>1):
         query_groups = "SELECT * FROM USER_GROUP WHERE GROUP_NAME LIKE ? AND GID LIKE ? AND (" 
         for i in range(len(add_string)-1):
-            query_groups += add_string[1] + " OR "
+            query_groups += add_string[1] + " AND "
         query_groups += add_string[len(add_string)-1] + ");"
         print(query_groups)
         members = []

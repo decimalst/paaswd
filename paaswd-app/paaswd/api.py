@@ -3,8 +3,6 @@ import json
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-from werkzeug.security import check_password_hash, generate_password_hash
-
 from paaswd.db import get_db
 
 bp = Blueprint('api', __name__, url_prefix='/api')
@@ -86,9 +84,8 @@ def groups_query():
     else:
         gid = "%"
     #Okay, so this logic sucks, but I didn't have a way to easily get the intersection of the
-    #groups list passed in and the groups list in the column. It'd basically be if the 
-    #intersection of the list and intersection of the column is a size greater than zero,
-    #then return the row
+    #groups list passed in and the groups list in the column. Not sure if sqlite supports a
+    #more robust solution.
     add_string = []
     if "member" in request.args.keys():
         for _ in request.args.getlist("member"):

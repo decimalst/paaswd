@@ -64,8 +64,11 @@ Vagrant.configure("2") do |config|
     sudo apt update
     sudo apt install -y python3 python3-pip
     sudo mkdir /opt/paaswd/
+    sudo mkdir /opt/paaswd/sql
     cp /vagrant/refresh.sh /opt/paaswd/
     sh /opt/paaswd/refresh.sh
     sudo chown -R vagrant:vagrant /opt/paaswd/
+    cd /opt/paaswd/paaswd-app/
+    pip3 install -e .
   SHELL
 end

@@ -15,11 +15,16 @@ It consists of two scripts, one which watches the /etc/passwd file for changes a
 
 ## Setup
 
+### If using Vagrant:
 1. Clone the repository.
-2. Run the vagrant file with "vagrant up"
-1. Run watch_dog.py as a user with access to read /etc/passwd and /etc/groups and write to /tmp/, or
-2. Run watch_dog.py with the command line arguments --group-file and --passwd-file with paths to copies of /etc/passwd which our user has read access to.
-3. Run our flask web-app. 
+2. Run the vagrant file with "vagrant up" - This should run the provisioning steps in the vagrant file.
+3. ssh into the machine, and run the /opt/paaswd/watch_dog.py as a user with access to the /etc/paaswd and /etc/group files, that can write to /tmp/ via python3 watch_dog.py
+4. Start the flask app with sh run.sh
+
+### If installing on a bare VM:
+1. Place all repo files in a directory /opt/paaswd/ on a server.
+2. Run the script /opt/paaswd/watch_dog.py as a user with access to the /etc/paaswd and /etc/group files, that can write to /tmp/ via python3 watch_dog.py
+3. Modify run.sh to have host=127.0.0.1 as the argument to "flask run", then run it with 'sh run.sh'
 
 
 ## Design justification:

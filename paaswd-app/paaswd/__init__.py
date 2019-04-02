@@ -24,13 +24,10 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
+    # a simple page that shows the app is running
     @app.route('/')
     def index():
-        return 'Hello, World!'
+        return 'alive'
 
     from . import api
     app.register_blueprint(api.bp)

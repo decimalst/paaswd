@@ -14,6 +14,8 @@ parser.add_argument('--database-path', default="/tmp/watch_dog_db.sqlite",
                     help='Path to database file, defaults to /tmp/watch_dog_db.sqlite')
 parser.add_argument('--log-file-path', default="/tmp/watch_dog.log",
                     help='Path to database file, defaults to /tmp/watch_dog.log')
+parser.add_argument('--setup-db-only', default=False, required=False, action="store_true",
+                    help='Optional argument to initialize the database file')
 
 args = parser.parse_args()
 
@@ -21,6 +23,7 @@ passwd_file_path = args.passwd_file
 group_file_path = args.group_file
 database_file_path = args.database_path
 log_file_path = args.log_file_path
+setup_db_only = args.setup_db_only
 
 
 try:
@@ -78,11 +81,22 @@ def write_passwd_changes(conn):
     conn.executemany(insert,rows)
     conn.commit()
     passwd_file.close()
-#we only really care if this file is changed, not if it's opened
+
 
 log = open(log_file_path,'w')
 
 conn = sqlite3.connect(database_file_path)
+if setup_db_only:
+    try:
+        table_create(conn)
+    except Exception as e:
+        print(e)
+        print("Error, could not create database.")
+        sys.exit(1)
+    finally:
+        conn.close()
+        sys.exit(0)
+
 table_create(conn)
 conn.commit()
 

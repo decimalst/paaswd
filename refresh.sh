@@ -1,8 +1,11 @@
 #!/bin/bash
+#deletes any python in the paaswd folder and copies new stuff from host folder mount	
+rm /opt/paaswd/*.sh
+rm /opt/paaswd/*.py
+rm /opt/paaswd/sql/*
+rm -rf /opt/paaswd/paaswd-app/
 
-#deletes any python in the home folder and copies new stuff from mac folder mount	
-rm ~/*.py
-rm ~/sql/*.sql
-
-cp /vagrant/*.py ~/.
-cp /vagrant/sql/*.sql ~/sql/
+cp /vagrant/*.sh /opt/paaswd/
+cp /vagrant/*.py /opt/paaswd/
+cp /vagrant/sql/* /opt/paaswd/sql/
+cp -r /vagrant/paaswd-app /opt/paaswd/

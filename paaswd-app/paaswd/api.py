@@ -3,7 +3,7 @@ import json
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-from paaswd.db import get_db
+from paaswd.db import get_db, init_db
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
